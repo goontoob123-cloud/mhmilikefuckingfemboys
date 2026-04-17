@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>mmmm</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #111;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+textarea, input {
+    width: 350px;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+}
+</style>
+</head>
+
+<body>
+
+<h2>mhm i like fucking femboys</h2>
+
+<textarea id="input" rows="4" placeholder="type text or encoded numbers"></textarea>
+
+<br>
+
+<button onclick="encode()">Encode</button>
+<button onclick="decode()">Decode</button>
+
+<h3>Output:</h3>
+<textarea id="output" rows="4" readonly></textarea>
+
+<script>
+//encode ig bby
+function encode() {
+    let text = document.getElementById("input").value.toLowerCase();
+    let result = "";
+
+    for (let c of text) {
+        if (c === " ") {
+            result += "/-"; 
+        } else if (c >= "a" && c <= "z") {
+            result += (c.charCodeAt(0) - 96) + "-";
+        }
+    }
+
+    result = result.replace(/-$/g, "");
+
+    document.getElementById("output").value = result;
+}
+
+// defagitize
+function decode() {
+    let input = document.getElementById("input").value;
+
+    let parts = input.split("-");
+    let result = "";
+
+    for (let p of parts) {
+        if (p === "" || p === undefined) continue;
+
+        if (p === "/") {
+            result += " ";
+        } else {
+            let num = parseInt(p);
+            if (!isNaN(num)) {
+                result += String.fromCharCode(num + 96);
+            }
+        }
+    }
+
+    document.getElementById("output").value = result;
+}
+</script>
+
+</body>
+</html>
